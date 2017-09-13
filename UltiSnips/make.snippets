@@ -1,0 +1,44 @@
+snippet swarm "Docker swarm operations"
+SWARM := $(eval export DOCKER_HOST=tcp://172.31.46.127:3375)
+endsnippet
+
+snippet help "Comment based help documentation" b
+help:
+	@grep -E '^[a-zA-Z0-9._-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $\$1, $\$2}'
+
+.DEFAULT_GOAL := help
+endsnippet
+
+snippet kops "K8s operations" b
+create: ## create cluster
+	kops create cluster --zones=ap-northeast-2a,ap-northeast-2c ${1} --out=. --target=terraform
+
+edit.cluster: ## edit cluster
+	kops edit cluster ${2:$1}
+
+edit.ig: ## edit cluster instance group
+	kops edit ig ${3:$1}
+
+update: ## update cluster
+	kops update cluster ${4:$1} --out=. --target=terraform
+
+del.cluster: ## delete cluster
+	kops delete cluster ${5:$1} --yes
+
+validate: ## validate cluster config
+	kops validate cluster ${6:$1}
+
+endsnippet
+
+snippet terraform "Terraform operations" b
+init: ## init terrafor project
+	terraform init
+
+apply: ## apply project
+	terraform plan
+	terraform apply
+
+destroy: ## destroy provisioned project
+	terraform plan --destroy
+	terraform destroy
+endsnippet

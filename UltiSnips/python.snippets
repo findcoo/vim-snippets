@@ -709,4 +709,26 @@ snippet pmdoc "pocoo style module doc string" b
 $0
 endsnippet
 
+snippet encf
+@classmethod
+def $1(cls):
+	query = '''
+		SELECT $2
+			FROM ${3:$1}
+			WHERE $4
+	'''
+	table = cls.db.execute(query)
+
+	update_query = '''
+		UPDATE ${3:$1}
+			SET $5
+			WHERE id=:id
+	'''
+	for row in table:
+		params = dict(row)
+		encrypted = enc.encrypt_column('${3:$1}', params)
+		print(encrypted)
+		cls.db.execute(update_query, encrypted)
+endsnippet
+
 # vim:ft=snippets:
