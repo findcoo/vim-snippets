@@ -16,8 +16,11 @@ create: ## create cluster
 edit.cluster: ## edit cluster
 	kops edit cluster ${2:$1}
 
-edit.ig: ## edit cluster instance group
-	kops edit ig ${3:$1}
+edit.nodes: ## edit cluster node instance group
+	kops edit ig nodes
+
+edit.master: ## edit cluster master instance group
+	kops edit ig master 
 
 update: ## update cluster
 	kops update cluster ${4:$1} --out=. --target=terraform
@@ -27,6 +30,9 @@ del.cluster: ## delete cluster
 
 validate: ## validate cluster config
 	kops validate cluster ${6:$1}
+
+install.ui: ## install k8s Dashboard UI
+	kubectl create -f https://rawgit.com/kubernetes/dashboard/master/src/deploy/kubernetes-dashboard.yaml 
 
 endsnippet
 

@@ -1,0 +1,10 @@
+snippet node "" b
+node {
+	checkout scm
+	def image = "${1:image}"
+	
+	stage('Build Image') {
+		docker.build(image)
+	}
+}
+endsnippet
