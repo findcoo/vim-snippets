@@ -145,8 +145,49 @@ snippet us
 'use strict'`!p snip.rv = semi(snip)`
 endsnippet
 
-snippet reim
+snippet import_react "import react"
 import React, { Component } from 'react';
+endsnippet
+
+snippet component "react`s component"
+type Props = {
+}
+
+class $1 extends Component<Props> {
+	
+	render() {
+	}
+}
+endsnippet
+
+snippet constructor "react`s component constructor"
+	constructor() {
+		super(props: Props);	
+	}
+endsnippet
+
+snippet componentWillReceiveProps "react`s reserved method of the component when call component received new props"
+	componentWillReceiveProps(nextProps: Props) {
+	}
+endsnippet
+
+snippet componentDidMount "react`s reserved method of the component when call DOM attached component"
+	componentDidMount() {
+	}
+endsnippet
+
+snippet componentDidUnMount "react`s reserved method of the component when call Dom detached component"
+	componentDidUnMount() {
+	}
+endsnippet
+
+
+
+snippet mapStateToProps "mapping redux state to the component"
+	const mapStateTopProps = ({ $1 }) => {
+		$2
+		return { $3 };
+	}
 endsnippet
 
 # vim:ft=snippets:
